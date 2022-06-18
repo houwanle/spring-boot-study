@@ -1,5 +1,6 @@
 package com.lele.springbootstudy.controller;
 
+import com.lele.springbootstudy.common.BaseErrorCode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,15 @@ public class HelloController {
     @GetMapping("/queryServerPort")
     public String queryServerPort() {
         return serverPort;
+    }
+
+    /**
+     * 国际化测试接口
+     * @return
+     */
+    @GetMapping("/message")
+    public String message() {
+        return BaseErrorCode.getMessage("welcome");
     }
 
 }
