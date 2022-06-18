@@ -79,3 +79,6 @@ management.endpoints.web.exposure.include=configprops,beans
 ```
 management.endpoints.web.exposure.include=*
 ```
+
+### 国际化
+1. 支持中英文（依赖于服务器的默认语言）
