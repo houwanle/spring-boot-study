@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--本文主要输出日志为控制台日志，系统日志，sql日志，异常日志-->
+    <!-- %m输出的信息,%p日志级别,%t线程名,%d日期,%c类的全名,,,, -->
+
+    <springProperty scope="context" name="logPath" source="logging.file.path"/>
+<!--    <springProperty scope="context" name="ipAddress" source="spring.cloud.client.ip-address"/>-->
+<!--    <springProperty scope="context" name="instance.port" source="server.port"/>-->
+
+    <!--控制台日志-->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} [%-40.40logger{39}:%line] %m%n </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--  Debug级别日志  -->
+    <appender name="FileDebug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<file> 日志目录，没有会自动创建-->
+<!--        <file>${logPath}/springboot_study_debug_${ipAddress}_${instance.port}.log</file>-->
+        <file>${logPath}/springboot_study_debug.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} [%-40.40logger{39}:%line] %m%n </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+<!--            <fileNamePattern>${logPath}/springboot_study_debug_${ipAddress}_${instance.port}.%d{yyyy-MM-dd}_%i.log</fileNamePattern>-->
+            <fileNamePattern>${logPath}/springboot_study_debug.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <maxFileSize>50MB</maxFileSize>
+            <totalSizeCap>200MB</totalSizeCap>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+    <!--  Info级别日志  -->
+    <appender name="FileInfo" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<file> 日志目录，没有会自动创建-->
+<!--        <file>${logPath}/springboot_study_info_${ipAddress}_${instance.port}.log</file>-->
+        <file>${logPath}/springboot_study_info.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} [%-40.40logger{39}:%line] %m%n </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+<!--            <fileNamePattern>${logPath}/springboot_study_info_${ipAddress}_${instance.port}.%d{yyyy-MM-dd}_%i.log</fileNamePattern>-->
+            <fileNamePattern>${logPath}/springboot_study_info.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <maxFileSize>50MB</maxFileSize>
+            <totalSizeCap>200MB</totalSizeCap>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <!--  Warn级别日志  -->
+    <appender name="FileWarn" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<file> 日志目录，没有会自动创建-->
+<!--        <file>${logPath}/springboot_study_warn_${ipAddress}_${instance.port}.log</file>-->
+        <file>${logPath}/springboot_study_warn.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} [%-40.40logger{39}:%line] %m%n </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+<!--            <fileNamePattern>${logPath}/springboot_study_warn_${ipAddress}_${instance.port}.%d{yyyy-MM-dd}_%i.log</fileNamePattern>-->
+            <fileNamePattern>${logPath}/springboot_study_warn.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <maxFileSize>50MB</maxFileSize>
+            <totalSizeCap>200MB</totalSizeCap>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+    </appender>
+
+    <!--  Error级别日志  -->
+    <appender name="FileError" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<file> 日志目录，没有会自动创建-->
+<!--        <file>${logPath}/springboot_study_error_${ipAddress}_${instance.port}.log</file>-->
+        <file>${logPath}/springboot_study_error.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} [%-40.40logger{39}:%line] %m%n </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+<!--            <fileNamePattern>${logPath}/springboot_study_error_${ipAddress}_${instance.port}.%d{yyyy-MM-dd}_%i.log</fileNamePattern>-->
+            <fileNamePattern>${logPath}/springboot_study_error.%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <maxFileSize>50MB</maxFileSize>
+            <totalSizeCap>200MB</totalSizeCap>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+
+    <springProfile name="error">
+        <root level="ERROR">
+            <appender-ref ref="FileDebug"/>
+            <appender-ref ref="FileInfo"/>
+            <appender-ref ref="FileWarn"/>
+            <appender-ref ref="FileError"/>
+            <appender-ref ref="Console"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="shopping">
+        <root level="WARN">
+            <appender-ref ref="FileDebug"/>
+            <appender-ref ref="FileInfo"/>
+            <appender-ref ref="FileWarn"/>
+            <appender-ref ref="FileError"/>
+            <appender-ref ref="Console"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="deploy">
+        <root level="INFO">
+            <appender-ref ref="FileDebug"/>
+            <appender-ref ref="FileInfo"/>
+            <appender-ref ref="FileWarn"/>
+            <appender-ref ref="FileError"/>
+            <appender-ref ref="Console"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="FileDebug"/>
+            <appender-ref ref="FileInfo"/>
+            <appender-ref ref="FileWarn"/>
+            <appender-ref ref="FileError"/>
+            <appender-ref ref="Console"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dbg">
+        <root level="DEBUG">
+            <appender-ref ref="FileDebug"/>
+            <appender-ref ref="FileInfo"/>
+            <appender-ref ref="FileWarn"/>
+            <appender-ref ref="FileError"/>
+            <appender-ref ref="Console"/>
+        </root>
+    </springProfile>
+
+</configuration>

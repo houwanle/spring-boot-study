@@ -1,6 +1,7 @@
 package com.lele.springbootstudy.controller;
 
 import com.lele.springbootstudy.common.BaseErrorCode;
+import com.lele.springbootstudy.method.BaseLogMethod;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
+
+    private static final String TAG = "HelloController";
 
     @Value("${server.port}")
     private String serverPort;
@@ -33,6 +36,7 @@ public class HelloController {
      */
     @GetMapping("/message")
     public String message() {
+        BaseLogMethod.logInfo(TAG, "12345");
         return BaseErrorCode.getMessage("welcome");
     }
 
