@@ -32,4 +32,21 @@ public class BaseErrorCode {
     public static String getMessage(String key, Locale locale) {
         return ResourceBundle.getBundle("i18n/message", locale).getString(key);
     }
+
+
+    /**
+     * 系统异常
+     */
+    public final static int SYSTEM_EXCEPTION = 1110;
+
+    /**
+     * 参数为空
+     */
+    public final static int PARAMETER_IS_NULL = 1210;
+
+    /**
+     * Response JSON解析异常
+     */
+    public final static int RESPONSE_JSON_EXCEPTION = 1340;
+
 }
