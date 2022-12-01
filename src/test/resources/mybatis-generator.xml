@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--导入属性配置 -->
+    <properties resource="generator.properties"/>
+
+    <!--数据库驱动jar所在位置-->
+    <classPathEntry location="${jdbc.driverLocation}"/>
+
+    <!--配置mysqlTables表信息内容体，targetRuntime指定采用MyBatis3的版本-->
+    <context id="mysqlTables" targetRuntime="MyBatis3">
+
+        <property name="mergeAble" value="false"/>
+
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- Pagination -->
+        <plugin type="com.mybatis.plugin.MySqlPaginationPlugin"/>
+        <!--<plugin type="com.mybatis.plugin.SerializablePlugin" />-->
+        <!--<plugin type="com.mybatis.plugin.ToStringPlugin" />-->
+        <!-- 关闭注解信息 -->
+        <commentGenerator type="com.mybatis.generator.api.MyCommentGenerator">
+            <property name="suppressDate" value="false"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.connectionURL}"
+                        userId="${jdbc.userId}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
+            NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- 生成实体类 存放位置 项目和包的位置;targetPackage 指定model类的包名;targetProject:生成model类的位置-->
+        <javaModelGenerator
+                targetPackage="${targetPackage.path}.entity"
+                targetProject="${targetProject.path}/src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成sqlMap xml文件 存放位置;targetProject:mapper映射文件生成的位置-->
+        <sqlMapGenerator
+                targetPackage="mapperMybatis"
+                targetProject="${targetProject.path}/src/main/resources">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- mapper配置 DAO类存放位置;targetPackage指定dao接口类的包名;targetProject指定生成的dao接口放的位置-->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="${targetPackage.path}.dao"
+                             targetProject="${targetProject.path}/src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!-- tables -->
+        <!--<table schema="bo_commodity_center_product" tableName="tb_oss_price_plan" domainObjectName="OssPricePlanTab"/>-->
+        <!--<table schema="bo_commodity_center_product" tableName="tb_oss_product" domainObjectName="OssProductTab"/>-->
+
+        <!--<table schema="bo_commodity_center_relation" tableName="tb_oss_account_product" domainObjectName="OssAccountProductTab"/>-->
+        <!--<table schema="bo_commodity_center_relation" tableName="tb_oss_product_resource_ref" domainObjectName="OssProductResourceRefTab"/>-->
+
+        <!--<table schema="bo_content_live_channel" tableName="tb_live_channel" domainObjectName="LiveChannelTab"/>-->
+        <!--<table schema="bo_content_live_channel" tableName="tb_live_epg" domainObjectName="LiveEpgTab"/>-->
+        <!--<table schema="bo_content_live_channel" tableName="tb_live_epg_backup" domainObjectName="LiveEpgBackupTab"/>-->
+
+        <!--<table schema="bo_content_live_info" tableName="tb_live_pageinfo" domainObjectName="LivePageInfoTab"/>-->
+        <!--<table schema="bo_content_live_info" tableName="tb_metadata_channelcategory" domainObjectName="MetadataChannelCategoryTab"/>-->
+
+        <!--<table schema="bo_content_live_relation" tableName="tb_live_channel_category" domainObjectName="LiveChannelCategoryTab"/>-->
+        <!--<table schema="bo_content_live_relation" tableName="tb_live_channel_customer" domainObjectName="LiveChannelCustomerTab"/>-->
+        <!--<table schema="bo_content_live_relation" tableName="tb_live_channel_group" domainObjectName="LiveChannelGroupTab"/>-->
+        <!--<table schema="bo_content_live_relation" tableName="tb_live_channel_location" domainObjectName="LiveChannelLocationTab"/>-->
+        <!--<table schema="bo_content_live_relation" tableName="tb_live_channel_pf_rl" domainObjectName="LiveChannelPfRlTab"/>-->
+
+        <!--<table schema="bo_content_recommend_home" tableName="tb_recommendation_home"  domainObjectName="RecommendationHomeTab"/>-->
+
+        <!--<table schema="bo_content_vod_column" tableName="tb_mam_columns" domainObjectName="MamColumnsTab"/>-->
+
+        <!--<table schema="bo_content_vod_media" tableName="tb_mam_asset_column_ref" domainObjectName="MamAssetColumnRefTab"/>-->
+        <!--<table schema="bo_content_vod_media" tableName="tb_mam_package" domainObjectName="MamPackageTab"/>-->
+        <!--<table schema="bo_content_vod_media" tableName="tb_mam_title" domainObjectName="MamTitleTab"/>-->
+        <!--<table schema="bo_content_vod_media" tableName="tb_mam_title_application" domainObjectName="MamTitleApplicationTab"/>-->
+
+        <!--<table schema="bo_content_vod_relation" tableName="tb_mam_column_image_ref" domainObjectName="MamColumnImageRefTab"/>-->
+        <!--<table schema="bo_content_vod_relation" tableName="tb_mam_column_location_ref" domainObjectName="MamColumnLocationRefTab"/>-->
+        <!--<table schema="bo_content_vod_relation" tableName="tb_mam_column_platform_ref" domainObjectName="MamColumnPlatformRefTab"/>-->
+        <!--<table schema="bo_content_vod_relation" tableName="tb_metadata_program_cornermark_ref" domainObjectName="MetadataProgramCornerMarkRefTab"/>-->
+
+        <!--<table schema="bo_content_vod_transcode" tableName="tb_mam_system_parameter" domainObjectName="MamSystemParameterTab"/>-->
+        <!--<table schema="bo_content_vod_transcode" tableName="tb_mam_transcode_job" domainObjectName="MamTransCodeJobTab"/>-->
+
+        <!--<table schema="bo_member_center_relation" tableName="tb_oss_account_terminal_link" domainObjectName="OssAccountTerminalLinkTab"/>-->
+
+        <!--<table schema="bo_member_center_user" tableName="tb_member_center_group_user" domainObjectName="MemberCenterGroupUserTab"/>-->
+        <!--<table schema="bo_member_center_user" tableName="tb_member_center_user_group" domainObjectName="MemberCenterUserGroupTab"/>-->
+        <!--<table schema="bo_member_center_user" tableName="tb_oss_account" domainObjectName="OssAccountTab"/>-->
+        <!--<table schema="bo_member_center_user" tableName="tb_oss_customer" domainObjectName="OssCustomerTab"/>-->
+
+        <!--<table schema="bo_metadata_location" tableName="tb_metadata_location" domainObjectName="MetadataLocationTab"/>-->
+
+        <!--<table schema="bo_metadata_poster_resolution" tableName="tb_metadata_poster_resolution" domainObjectName="MetadataPosterResolutionTab"/>-->
+
+        <!--<table schema="bo_metadata_push" tableName="tb_msgpush_msg" domainObjectName="MsgPushMsgTab"/>-->
+
+        <!--<table schema="bo_metadata_resource" tableName="tb_live_channel_poster"  domainObjectName="LiveChannelPosterTab"/>-->
+        <!--<table schema="bo_metadata_resource" tableName="tb_mam_mediafile"  domainObjectName="MamMediaFileTab"/>-->
+        <!--<table schema="bo_metadata_resource" tableName="tb_mam_movie"  domainObjectName="MamMovieTab"/>-->
+        <!--<table schema="bo_metadata_resource" tableName="tb_mam_package_poster"  domainObjectName="MamPackagePosterTab"/>-->
+        <!--<table schema="bo_metadata_resource" tableName="tb_mam_poster"  domainObjectName="MamPosterTab"/>-->
+        <!--<table schema="bo_metadata_resource" tableName="tb_metadata_cornermark"  domainObjectName="MetadataCornerMarkTab"/>-->
+        <!--<table schema="bo_metadata_resource" tableName="tb_metadata_image"  domainObjectName="MetadataImageTab"/>-->
+        <!--<table schema="bo_metadata_resource" tableName="tb_recommendation_image"  domainObjectName="RecommendationImageTab"/>-->
+
+        <!--<table schema="bo_metadata_stream" tableName="tb_metadata_pf_rl" domainObjectName="MetadataPfRlTab"/>-->
+        <!--<table schema="bo_metadata_stream" tableName="tb_metadata_platform" domainObjectName="MetadataPlatformTab"/>-->
+        <!--<table schema="bo_metadata_stream" tableName="tb_metadata_resolution_new" domainObjectName="MetadataResolutionNewTab"/>-->
+
+        <!--<table schema="bo_metadata_terminal" tableName="tb_metadata_application" domainObjectName="MetadataApplicationTab"/>-->
+
+        <!--<table schema="bo_metadata_unit" tableName="tb_metadata_data" domainObjectName="MetadataDataTab"/>-->
+        <!--<table schema="bo_metadata_unit" tableName="tb_metadata_dict" domainObjectName="MetadataDictTab"/>-->
+        <!--<table schema="bo_metadata_unit" tableName="tb_metadata_status" domainObjectName="MetadataStatusTab"/>-->
+
+        <!--<table schema="bo_system_admin_permission" tableName="tb_security_permission" domainObjectName="SecurityPermissionTab"/>-->
+
+        <!--<table schema="bo_system_admin_relation" tableName="tb_security_role_permission" domainObjectName="SecurityRolePermissionTab"/>-->
+        <!--<table schema="bo_system_admin_relation" tableName="tb_security_user_role" domainObjectName="SecurityUserRoleTab"/>-->
+
+        <!--<table schema="bo_system_admin_role" tableName="tb_security_role" domainObjectName="SecurityRoleTab"/>-->
+
+        <!--<table schema="bo_system_admin_user" tableName="tb_security_user" domainObjectName="SecurityUserTab"/>-->
+        <!--<table schema="bo_system_admin_user" tableName="tb_cloud_present_user" domainObjectName="CloudPresentUser"/>-->
+        <table
+                schema="springboot"
+                tableName="tb_user"
+                domainObjectName="UserTab"/>
+
+
+    </context>
+</generatorConfiguration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
